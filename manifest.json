@@ -1,12 +1,12 @@
 {
-  "name": "NoteCraft Pro - Premium Notepad",
+  "name": "NoteCraft Pro Studio - AI & Capture Notepad",
   "short_name": "NoteCraft",
-  "description": "Ultra premium notepad app with rich text editing, folders, and beautiful design",
+  "description": "Ultra premium studio notepad with screen capture, video recording, voice memos, and AI assistant",
   "start_url": "./index.html",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#0a0a1a",
-  "theme_color": "#6366f1",
+  "background_color": "#030308",
+  "theme_color": "#0a0a1a",
   "icons": [
     {
       "src": "icon-192.png",
@@ -19,6 +19,43 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Quick Note",
+      "short_name": "New Note",
+      "description": "Create a new note instantly",
+      "url": "./index.html?action=new-note",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Screen Capture & Snip",
+      "short_name": "Screenshot",
+      "description": "Capture and annotate screen",
+      "url": "./index.html?action=screenshot",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Screen Video Recorder",
+      "short_name": "Record Video",
+      "description": "Record screen with microphone and facecam",
+      "url": "./index.html?action=record",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Voice Memo Studio",
+      "short_name": "Voice Memo",
+      "description": "Record audio memo with live waveform",
+      "url": "./index.html?action=voice",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Scan Document & OCR",
+      "short_name": "Scan OCR",
+      "description": "Extract text from camera scanner",
+      "url": "./index.html?action=scan",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
     }
   ]
 }
