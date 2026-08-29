@@ -158,14 +158,14 @@ html, body {
   -webkit-overflow-scrolling:touch;
   scrollbar-width:none;
   padding-bottom:120px;
-  opacity:0; transform:translateX(20px) scale(0.99);
+  opacity:0; transform:translateX(20px);
   transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
   pointer-events:none;
   height: 100%;
   touch-action: pan-y;
 }
 .screen::-webkit-scrollbar{display:none}
-.screen.active { opacity:1; transform:translateX(0) scale(1); pointer-events:auto; }
+.screen.active { opacity:1; transform:translateX(0); pointer-events:auto; }
 
 /* Ensure notes grid doesn't block scroll */
 .notes-container {
@@ -752,7 +752,7 @@ html, body {
    BOTTOM NAV
    ═══════════════════════════════════════════════════════ */
 /* Bottom nav position defined in override section above */
-.bottom-nav-inner {
+.bottom-nav-inner { width: 100%; max-width: 500px; margin: 0 auto;
   display:flex; align-items:center; justify-content:space-around;
   background:rgba(10,10,26,0.92);
   backdrop-filter:blur(30px) saturate(180%);
@@ -1817,7 +1817,7 @@ input:focus, textarea:focus, select:focus, button:focus {
 }
 
 /* Improved bottom nav */
-.bottom-nav-inner {
+.bottom-nav-inner { width: 100%; max-width: 500px; margin: 0 auto;
   transition: all 0.3s var(--ease-out);
 }
 
@@ -1980,6 +1980,277 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ═══════════════════════════════════════════════════════
+   PREMIUM FEATURES CSS - v3.0 Ultimate
+   ═══════════════════════════════════════════════════════ */
+
+/* POMODORO TIMER */
+.pomodoro-screen { padding: 24px; }
+.pomo-circle {
+  width: 240px; height: 240px; border-radius: 50%;
+  margin: 40px auto; position: relative;
+  background: conic-gradient(var(--primary) var(--pomo-progress, 0%), var(--card-bg) 0%);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 60px rgba(99,102,241,0.2);
+  transition: background 1s linear;
+}
+.pomo-circle::before {
+  content: ''; position: absolute; inset: 12px; border-radius: 50%;
+  background: var(--bg-1);
+}
+.pomo-inner {
+  position: relative; z-index: 1; text-align: center;
+}
+.pomo-time {
+  font-family: 'JetBrains Mono', monospace; font-size: 48px; font-weight: 700;
+  color: var(--text-primary);
+}
+.pomo-label { font-size: 14px; color: var(--text-secondary); margin-top: 4px; }
+.pomo-controls {
+  display: flex; justify-content: center; gap: 16px; margin-top: 24px;
+}
+.pomo-btn {
+  padding: 12px 28px; border-radius: 16px; border: none;
+  font-size: 16px; font-weight: 600; cursor: pointer;
+  transition: all 0.3s var(--ease-spring);
+}
+.pomo-btn-primary {
+  background: var(--grad-primary); color: #fff;
+  box-shadow: 0 4px 20px rgba(99,102,241,0.3);
+}
+.pomo-btn-secondary {
+  background: var(--card-bg); color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+.pomo-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+  margin-top: 32px;
+}
+.pomo-stat {
+  background: var(--card-bg); border-radius: 16px; padding: 16px;
+  text-align: center; border: 1px solid var(--border);
+}
+.pomo-stat-num { font-size: 24px; font-weight: 700; color: var(--primary); }
+.pomo-stat-lbl { font-size: 12px; color: var(--text-secondary); margin-top: 4px; }
+.pomo-modes {
+  display: flex; justify-content: center; gap: 8px; margin-bottom: 16px;
+}
+.pomo-mode-btn {
+  padding: 8px 16px; border-radius: 12px; border: 1px solid var(--border);
+  background: var(--card-bg); color: var(--text-secondary); font-size: 13px;
+  cursor: pointer; transition: all 0.3s;
+}
+.pomo-mode-btn.active {
+  background: var(--primary); color: #fff; border-color: var(--primary);
+}
+
+/* KANBAN BOARD */
+.kanban-board {
+  display: flex; gap: 16px; padding: 16px;
+  overflow-x: auto; min-height: 60vh;
+}
+.kanban-column {
+  min-width: 280px; flex: 1;
+  background: var(--card-bg); border-radius: 16px;
+  border: 1px solid var(--border); padding: 16px;
+}
+.kanban-col-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 16px; padding-bottom: 12px;
+  border-bottom: 2px solid var(--border);
+}
+.kanban-col-title {
+  font-weight: 700; font-size: 16px; display: flex; align-items: center; gap: 8px;
+}
+.kanban-col-count {
+  background: var(--primary); color: #fff; border-radius: 8px;
+  padding: 2px 8px; font-size: 12px; font-weight: 600;
+}
+.kanban-card {
+  background: var(--bg-1); border-radius: 12px; padding: 14px;
+  margin-bottom: 10px; border: 1px solid var(--border);
+  cursor: grab; transition: all 0.2s;
+}
+.kanban-card:active { cursor: grabbing; transform: scale(0.98); }
+.kanban-card-title { font-weight: 600; font-size: 14px; margin-bottom: 6px; }
+.kanban-card-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.4; }
+.kanban-card-tags { display: flex; gap: 4px; margin-top: 8px; flex-wrap: wrap; }
+.kanban-tag {
+  padding: 2px 8px; border-radius: 6px; font-size: 11px;
+  background: rgba(99,102,241,0.15); color: var(--primary);
+}
+
+/* CALENDAR VIEW */
+.calendar-view { padding: 16px; }
+.cal-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 16px;
+}
+.cal-month { font-size: 20px; font-weight: 700; }
+.cal-nav { display: flex; gap: 8px; }
+.cal-nav-btn {
+  width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--border);
+  background: var(--card-bg); color: var(--text-primary); cursor: pointer;
+  display: flex; align-items: center; justify-content: center; font-size: 18px;
+}
+.cal-grid {
+  display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px;
+}
+.cal-day-header {
+  text-align: center; font-size: 12px; font-weight: 600;
+  color: var(--text-secondary); padding: 8px 0;
+}
+.cal-day {
+  aspect-ratio: 1; border-radius: 12px; display: flex;
+  flex-direction: column; align-items: center; justify-content: center;
+  font-size: 14px; cursor: pointer; transition: all 0.2s;
+  border: 1px solid transparent; position: relative;
+}
+.cal-day:hover { background: var(--card-bg); }
+.cal-day.today { border-color: var(--primary); font-weight: 700; }
+.cal-day.has-notes::after {
+  content: ''; position: absolute; bottom: 6px;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--primary);
+}
+.cal-day.other-month { opacity: 0.3; }
+
+/* TRASH / RECYCLE BIN */
+.trash-item {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--card-bg); border-radius: 14px; padding: 14px;
+  margin-bottom: 10px; border: 1px solid var(--border);
+}
+.trash-item-info { flex: 1; }
+.trash-item-title { font-weight: 600; font-size: 14px; }
+.trash-item-date { font-size: 12px; color: var(--text-secondary); }
+.trash-actions { display: flex; gap: 8px; }
+.trash-btn {
+  padding: 6px 14px; border-radius: 10px; border: none;
+  font-size: 13px; cursor: pointer; font-weight: 600;
+}
+.trash-btn-restore { background: rgba(34,197,94,0.15); color: #22c55e; }
+.trash-btn-delete { background: rgba(239,68,68,0.15); color: #ef4444; }
+
+/* SCREENSHOT & RECORDING */
+.capture-overlay {
+  position: fixed; inset: 0; z-index: 10001;
+  background: rgba(0,0,0,0.8); display: none;
+  flex-direction: column; align-items: center; justify-content: center;
+}
+.capture-overlay.show { display: flex; }
+.capture-preview {
+  max-width: 90%; max-height: 70vh; border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+.capture-actions {
+  display: flex; gap: 12px; margin-top: 24px;
+}
+.rec-indicator {
+  position: fixed; top: 12px; left: 50%; transform: translateX(-50%);
+  z-index: 10002; background: #ef4444; color: #fff;
+  padding: 8px 20px; border-radius: 20px; font-weight: 700;
+  display: none; align-items: center; gap: 8px;
+  animation: recPulse 1s infinite;
+}
+.rec-indicator.show { display: flex; }
+.rec-dot {
+  width: 10px; height: 10px; border-radius: 50%; background: #fff;
+  animation: recBlink 1s infinite;
+}
+@keyframes recPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.4); } 50% { box-shadow: 0 0 0 12px rgba(239,68,68,0); } }
+@keyframes recBlink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+/* VERSION HISTORY */
+.version-list { padding: 16px; }
+.version-item {
+  display: flex; gap: 14px; padding: 14px;
+  background: var(--card-bg); border-radius: 14px;
+  margin-bottom: 10px; border: 1px solid var(--border);
+  cursor: pointer; transition: all 0.2s;
+}
+.version-item:hover { border-color: var(--primary); }
+.version-dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--primary); margin-top: 4px; flex-shrink: 0;
+}
+.version-info { flex: 1; }
+.version-time { font-weight: 600; font-size: 14px; }
+.version-preview { font-size: 12px; color: var(--text-secondary); margin-top: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 250px; }
+
+/* IMAGE ATTACHMENT */
+.note-images {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px;
+}
+.note-image-thumb {
+  width: 60px; height: 60px; border-radius: 10px;
+  object-fit: cover; border: 2px solid var(--border);
+  cursor: pointer; transition: all 0.2s;
+}
+.note-image-thumb:hover { border-color: var(--primary); transform: scale(1.05); }
+
+/* SMART TAGS */
+.smart-tag-suggestions {
+  display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px;
+}
+.smart-tag {
+  padding: 4px 12px; border-radius: 10px; font-size: 12px;
+  background: rgba(99,102,241,0.1); color: var(--primary);
+  cursor: pointer; transition: all 0.2s; border: 1px solid transparent;
+}
+.smart-tag:hover { border-color: var(--primary); background: rgba(99,102,241,0.2); }
+
+/* VIEW TOGGLE BUTTONS */
+.view-toggles {
+  display: flex; gap: 4px; background: var(--card-bg);
+  border-radius: 12px; padding: 4px; border: 1px solid var(--border);
+}
+.view-toggle-btn {
+  padding: 6px 12px; border-radius: 8px; border: none;
+  background: transparent; color: var(--text-secondary);
+  font-size: 13px; cursor: pointer; transition: all 0.2s;
+}
+.view-toggle-btn.active {
+  background: var(--primary); color: #fff;
+}
+
+/* PREMIUM BADGE */
+.premium-badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 10px; border-radius: 8px; font-size: 11px; font-weight: 700;
+  background: linear-gradient(135deg, #f59e0b, #ef4444);
+  color: #fff; text-transform: uppercase; letter-spacing: 0.5px;
+}
+
+/* ENCRYPTED NOTE */
+.note-encrypted {
+  position: absolute; top: 8px; right: 8px;
+  font-size: 14px; opacity: 0.7;
+}
+
+/* STATS CHART */
+.stats-chart {
+  display: flex; align-items: flex-end; gap: 4px;
+  height: 120px; padding: 16px 0;
+}
+.stats-bar {
+  flex: 1; background: var(--grad-primary); border-radius: 6px 6px 0 0;
+  min-height: 4px; transition: height 0.5s var(--ease-spring);
+  position: relative;
+}
+.stats-bar-label {
+  position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%);
+  font-size: 10px; color: var(--text-secondary);
+}
+
+
+
+/* Bottom nav 6 items */
+.bottom-nav-inner { display: flex; justify-content: space-around; }
+.nav-item { flex: 1; min-width: 0; padding: 6px 2px; }
+.nav-ico { font-size: 20px; }
+.nav-lbl { font-size: 10px; }
+
 </style>
 </head>
 <body>
@@ -2048,10 +2319,10 @@ body {
     <div class="notes-container">
       <div class="notes-grid" id="notesGrid"></div>
     </div>
+  </div><!-- end sHome -->
 
-    <div class="fab" onclick="toggleFabMenu()">+</div>
-
-<!-- FAB Menu -->
+<!-- FAB & Menu (outside screen for proper fixed positioning) -->
+<div class="fab" id="mainFab" onclick="toggleFabMenu()">+</div>
 <div class="fab-menu" id="fabMenu">
   <div class="fab-menu-item" onclick="createNote();closeFabMenu()">
     <div class="fab-menu-item-emoji">📝</div>
@@ -2065,8 +2336,15 @@ body {
     <div class="fab-menu-item-emoji">🎤</div>
     <div>Voice Note</div>
   </div>
-</div>
+  <div class="fab-menu-item" onclick="openScreenshot();closeFabMenu()">
+    <div class="fab-menu-item-emoji">📸</div>
+    <div>Screenshot</div>
   </div>
+  <div class="fab-menu-item" onclick="openScreenRecord();closeFabMenu()">
+    <div class="fab-menu-item-emoji">🎬</div>
+    <div>Screen Record</div>
+  </div>
+</div>
 
   <!-- ═══ EDITOR SCREEN ═══ -->
   <div class="screen" id="sEditor">
@@ -2271,6 +2549,14 @@ body {
           </div>
           <div style="color:var(--text-4);">›</div>
         </div>
+        <div class="settings-item" onclick="renderTrash();goScreen('sTrash',-1)">
+          <div class="settings-icon" style="background:rgba(245,158,11,0.15);">🗑️</div>
+          <div class="settings-text">
+            <div class="settings-text-t">Trash / Recycle Bin</div>
+            <div class="settings-text-s">Recover deleted notes</div>
+          </div>
+          <div style="color:var(--text-4);">›</div>
+        </div>
         <div class="settings-item" onclick="clearAllData()" style="color:var(--rose);">
           <div class="settings-icon" style="background:rgba(244,63,94,0.15);">🗑️</div>
           <div class="settings-text">
@@ -2288,7 +2574,7 @@ body {
           <div class="settings-icon" style="background:var(--grad-ai);">✨</div>
           <div class="settings-text">
             <div class="settings-text-t">NoteCraft Pro</div>
-            <div class="settings-text-s">Version 2.0.1 · AI-Powered · Premium · Fixed</div>
+            <div class="settings-text-s">Version 3.0.0 · AI-Powered · Premium · Ultimate</div>
           </div>
         </div>
       </div>
@@ -2296,6 +2582,142 @@ body {
   </div>
 
 </div>
+
+
+  <!-- ═══ POMODORO SCREEN ═══ -->
+  <div class="screen" id="sPomodoro">
+    <div class="home-header">
+      <div class="home-title">🍅 <span class="home-title-grad">Pomodoro</span></div>
+      <div class="header-actions">
+        <div class="icon-btn" onclick="goScreen('sHome',0)">←</div>
+      </div>
+    </div>
+    <div class="pomodoro-screen">
+      <div class="pomo-modes">
+        <button class="pomo-mode-btn active" onclick="setPomoMode('work',this)">Focus (25m)</button>
+        <button class="pomo-mode-btn" onclick="setPomoMode('short',this)">Short Break (5m)</button>
+        <button class="pomo-mode-btn" onclick="setPomoMode('long',this)">Long Break (15m)</button>
+      </div>
+      <div class="pomo-circle" id="pomoCircle">
+        <div class="pomo-inner">
+          <div class="pomo-time" id="pomoTime">25:00</div>
+          <div class="pomo-label" id="pomoLabel">Focus Time</div>
+        </div>
+      </div>
+      <div class="pomo-controls">
+        <button class="pomo-btn pomo-btn-primary" id="pomoStartBtn" onclick="togglePomo()">▶ Start</button>
+        <button class="pomo-btn pomo-btn-secondary" onclick="resetPomo()">↺ Reset</button>
+      </div>
+      <div class="pomo-stats">
+        <div class="pomo-stat">
+          <div class="pomo-stat-num" id="pomoTodayCount">0</div>
+          <div class="pomo-stat-lbl">Today</div>
+        </div>
+        <div class="pomo-stat">
+          <div class="pomo-stat-num" id="pomoWeekCount">0</div>
+          <div class="pomo-stat-lbl">This Week</div>
+        </div>
+        <div class="pomo-stat">
+          <div class="pomo-stat-num" id="pomoTotalCount">0</div>
+          <div class="pomo-stat-lbl">Total</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ KANBAN SCREEN ═══ -->
+  <div class="screen" id="sKanban">
+    <div class="home-header">
+      <div class="home-title">📋 <span class="home-title-grad">Kanban Board</span></div>
+      <div class="header-actions">
+        <div class="icon-btn" onclick="goScreen('sHome',0)">←</div>
+      </div>
+    </div>
+    <div class="kanban-board" id="kanbanBoard">
+      <div class="kanban-column" data-status="todo">
+        <div class="kanban-col-header">
+          <div class="kanban-col-title">📋 To Do <span class="kanban-col-count" id="kanbanTodoCount">0</span></div>
+        </div>
+        <div id="kanbanTodo"></div>
+      </div>
+      <div class="kanban-column" data-status="progress">
+        <div class="kanban-col-header">
+          <div class="kanban-col-title">🔄 In Progress <span class="kanban-col-count" id="kanbanProgressCount">0</span></div>
+        </div>
+        <div id="kanbanProgress"></div>
+      </div>
+      <div class="kanban-column" data-status="done">
+        <div class="kanban-col-header">
+          <div class="kanban-col-title">✅ Done <span class="kanban-col-count" id="kanbanDoneCount">0</span></div>
+        </div>
+        <div id="kanbanDone"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ CALENDAR SCREEN ═══ -->
+  <div class="screen" id="sCalendar">
+    <div class="home-header">
+      <div class="home-title">📅 <span class="home-title-grad">Calendar</span></div>
+      <div class="header-actions">
+        <div class="icon-btn" onclick="goScreen('sHome',0)">←</div>
+      </div>
+    </div>
+    <div class="calendar-view">
+      <div class="cal-header">
+        <div class="cal-month" id="calMonth">August 2026</div>
+        <div class="cal-nav">
+          <button class="cal-nav-btn" onclick="changeCalMonth(-1)">‹</button>
+          <button class="cal-nav-btn" onclick="changeCalMonth(0)">•</button>
+          <button class="cal-nav-btn" onclick="changeCalMonth(1)">›</button>
+        </div>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+      <div id="calNotesList" style="margin-top:24px;"></div>
+    </div>
+  </div>
+
+  <!-- ═══ TRASH SCREEN ═══ -->
+  <div class="screen" id="sTrash">
+    <div class="home-header">
+      <div class="home-title">🗑️ <span class="home-title-grad">Trash</span></div>
+      <div class="header-actions">
+        <div class="icon-btn" onclick="emptyTrash()" title="Empty Trash">🧹</div>
+        <div class="icon-btn" onclick="goScreen('sHome',0)">←</div>
+      </div>
+    </div>
+    <div style="padding:16px;" id="trashList"></div>
+  </div>
+
+  <!-- ═══ VERSION HISTORY SCREEN ═══ -->
+  <div class="screen" id="sVersions">
+    <div class="home-header">
+      <div class="home-title">🕐 <span class="home-title-grad">Version History</span></div>
+      <div class="header-actions">
+        <div class="icon-btn" onclick="goScreen('sEditor',-1)">←</div>
+      </div>
+    </div>
+    <div class="version-list" id="versionList"></div>
+  </div>
+
+<!-- SCREENSHOT OVERLAY -->
+<div class="capture-overlay" id="captureOverlay">
+  <img class="capture-preview" id="capturePreview" src="" alt="Screenshot">
+  <div class="capture-actions">
+    <button class="pomo-btn pomo-btn-primary" onclick="downloadScreenshot()">💾 Save</button>
+    <button class="pomo-btn pomo-btn-secondary" onclick="shareScreenshot()">📤 Share</button>
+    <button class="pomo-btn pomo-btn-secondary" onclick="closeCaptureOverlay()">✕ Close</button>
+  </div>
+</div>
+
+<!-- RECORDING INDICATOR -->
+<div class="rec-indicator" id="recIndicator">
+  <div class="rec-dot"></div>
+  <span>REC</span>
+  <span id="recTimer">00:00</span>
+  <button style="background:none;border:none;color:#fff;font-size:16px;cursor:pointer;margin-left:8px;" onclick="stopScreenRecord()">⏹</button>
+</div>
+
 
 <!-- BOTTOM NAV -->
 <div class="bottom-nav">
@@ -2308,13 +2730,21 @@ body {
       <div class="nav-ico">📁</div>
       <div class="nav-lbl">Folders</div>
     </div>
-    <div class="nav-item" data-s="sFavorites" onclick="goScreen('sFavorites',2)">
-      <div class="nav-ico">⭐</div>
-      <div class="nav-lbl">Favorites</div>
+    <div class="nav-item" data-s="sKanban" onclick="syncNotesToKanban();goScreen('sKanban',1)">
+      <div class="nav-ico">📋</div>
+      <div class="nav-lbl">Kanban</div>
     </div>
-    <div class="nav-item" data-s="sSettings" onclick="goScreen('sSettings',3)">
+    <div class="nav-item" data-s="sCalendar" onclick="renderCalendar();goScreen('sCalendar',2)">
+      <div class="nav-ico">📅</div>
+      <div class="nav-lbl">Calendar</div>
+    </div>
+    <div class="nav-item" data-s="sPomodoro" onclick="goScreen('sPomodoro',3)">
+      <div class="nav-ico">🍅</div>
+      <div class="nav-lbl">Focus</div>
+    </div>
+    <div class="nav-item" data-s="sSettings" onclick="goScreen('sSettings',4)">
       <div class="nav-ico">⚙️</div>
-      <div class="nav-lbl">Settings</div>
+      <div class="nav-lbl">More</div>
     </div>
   </div>
 </div>
@@ -2824,6 +3254,12 @@ setTimeout(function() {
       console.error('❌ initAutoSave error:', e);
     }
     
+    try {
+      initPremiumFeatures();
+      console.log('✅ Premium features initialized');
+    } catch(e) {
+      console.error('❌ Premium init error:', e);
+    }
     console.log('✅ App initialization complete');
   } catch(e) {
     console.error('❌ Critical initialization error:', e);
@@ -5000,6 +5436,559 @@ document.addEventListener('DOMContentLoaded', () => {
     // Already set in HTML - no action needed
   } catch(e) { /* ignore */ }
 });
+
+
+/* ═══════════════════════════════════════════════════════
+   PREMIUM FEATURES JS - v3.0 Ultimate
+   ═══════════════════════════════════════════════════════ */
+
+// ═══ POMODORO TIMER ═══
+let pomoInterval = null;
+let pomoTimeLeft = 1500; // 25 min in seconds
+let pomoTotalTime = 1500;
+let pomoRunning = false;
+let pomoMode = 'work';
+let pomoStats = JSON.parse(localStorage.getItem('pomoStats') || '{"today":0,"week":0,"total":0,"lastDate":""}');
+
+function setPomoMode(mode, btn) {
+  pomoMode = mode;
+  document.querySelectorAll('.pomo-mode-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  
+  if (mode === 'work') { pomoTotalTime = 1500; pomoTimeLeft = 1500; }
+  else if (mode === 'short') { pomoTotalTime = 300; pomoTimeLeft = 300; }
+  else if (mode === 'long') { pomoTotalTime = 900; pomoTimeLeft = 900; }
+  
+  if (pomoRunning) { clearInterval(pomoInterval); pomoRunning = false; }
+  document.getElementById('pomoStartBtn').innerHTML = '▶ Start';
+  updatePomoDisplay();
+}
+
+function togglePomo() {
+  if (pomoRunning) {
+    clearInterval(pomoInterval);
+    pomoRunning = false;
+    document.getElementById('pomoStartBtn').innerHTML = '▶ Resume';
+  } else {
+    pomoRunning = true;
+    document.getElementById('pomoStartBtn').innerHTML = '⏸ Pause';
+    pomoInterval = setInterval(() => {
+      pomoTimeLeft--;
+      if (pomoTimeLeft <= 0) {
+        clearInterval(pomoInterval);
+        pomoRunning = false;
+        document.getElementById('pomoStartBtn').innerHTML = '▶ Start';
+        pomoComplete();
+      }
+      updatePomoDisplay();
+    }, 1000);
+  }
+}
+
+function resetPomo() {
+  clearInterval(pomoInterval);
+  pomoRunning = false;
+  pomoTimeLeft = pomoTotalTime;
+  document.getElementById('pomoStartBtn').innerHTML = '▶ Start';
+  updatePomoDisplay();
+}
+
+function updatePomoDisplay() {
+  const mins = Math.floor(pomoTimeLeft / 60);
+  const secs = pomoTimeLeft % 60;
+  document.getElementById('pomoTime').textContent = `${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
+  
+  const progress = ((pomoTotalTime - pomoTimeLeft) / pomoTotalTime) * 100;
+  document.getElementById('pomoCircle').style.setProperty('--pomo-progress', progress + '%');
+  
+  const labels = { work: 'Focus Time', short: 'Short Break', long: 'Long Break' };
+  document.getElementById('pomoLabel').textContent = labels[pomoMode];
+}
+
+function pomoComplete() {
+  if (pomoMode === 'work') {
+    const today = new Date().toDateString();
+    if (pomoStats.lastDate !== today) {
+      pomoStats.today = 0;
+      pomoStats.lastDate = today;
+    }
+    pomoStats.today++;
+    pomoStats.week++;
+    pomoStats.total++;
+    localStorage.setItem('pomoStats', JSON.stringify(pomoStats));
+    showToast('🍅 Pomodoro complete! Take a break.');
+  } else {
+    showToast('⏰ Break over! Ready to focus?');
+  }
+  updatePomoStats();
+  // Play sound
+  try { new Audio('data:audio/wav;base64,UklGRl9vT19teleXQBAABAAEARCxAGA=)').play(); } catch(e) {}
+}
+
+function updatePomoStats() {
+  const today = new Date().toDateString();
+  if (pomoStats.lastDate !== today) pomoStats.today = 0;
+  document.getElementById('pomoTodayCount').textContent = pomoStats.today;
+  document.getElementById('pomoWeekCount').textContent = pomoStats.week;
+  document.getElementById('pomoTotalCount').textContent = pomoStats.total;
+}
+
+// ═══ KANBAN BOARD ═══
+let kanbanData = JSON.parse(localStorage.getItem('kanbanData') || '{"todo":[],"progress":[],"done":[]}');
+
+function renderKanban() {
+  const columns = { todo: 'kanbanTodo', progress: 'kanbanProgress', done: 'kanbanDone' };
+  Object.keys(columns).forEach(status => {
+    const container = document.getElementById(columns[status]);
+    if (!container) return;
+    container.innerHTML = '';
+    (kanbanData[status] || []).forEach((item, idx) => {
+      const card = document.createElement('div');
+      card.className = 'kanban-card';
+      card.draggable = true;
+      card.dataset.status = status;
+      card.dataset.idx = idx;
+      card.innerHTML = `
+        <div class="kanban-card-title">${escHtml(item.title)}</div>
+        <div class="kanban-card-desc">${escHtml(item.desc || '')}</div>
+        ${item.tags ? '<div class="kanban-card-tags">' + item.tags.map(t => '<span class="kanban-tag">' + escHtml(t) + '</span>').join('') + '</div>' : ''}
+      `;
+      card.ondragstart = (e) => e.dataTransfer.setData('text', JSON.stringify({status, idx}));
+      card.ondragover = (e) => e.preventDefault();
+      card.ondrop = (e) => {
+        e.preventDefault();
+        const data = JSON.parse(e.dataTransfer.getData('text'));
+        moveKanbanCard(data.status, data.idx, status, idx);
+      };
+      container.appendChild(card);
+    });
+    const countEl = document.getElementById('kanban' + status.charAt(0).toUpperCase() + status.slice(1) + 'Count');
+    if (countEl) countEl.textContent = (kanbanData[status] || []).length;
+  });
+}
+
+function moveKanbanCard(fromStatus, fromIdx, toStatus, toIdx) {
+  const item = kanbanData[fromStatus].splice(fromIdx, 1)[0];
+  if (!item) return;
+  kanbanData[toStatus].splice(toIdx, 0, item);
+  localStorage.setItem('kanbanData', JSON.stringify(kanbanData));
+  renderKanban();
+}
+
+function addKanbanCard(status, title, desc, tags) {
+  if (!kanbanData[status]) kanbanData[status] = [];
+  kanbanData[status].push({ title, desc, tags: tags || [] });
+  localStorage.setItem('kanbanData', JSON.stringify(kanbanData));
+  renderKanban();
+}
+
+// Sync notes to kanban
+function syncNotesToKanban() {
+  const notes = state.notes || [];
+  kanbanData = { todo: [], progress: [], done: [] };
+  notes.forEach(n => {
+    const item = { title: n.title, desc: (n.content || '').substring(0, 100), tags: n.tags || [] };
+    if (n.kanbanStatus === 'done') kanbanData.done.push(item);
+    else if (n.kanbanStatus === 'progress') kanbanData.progress.push(item);
+    else kanbanData.todo.push(item);
+  });
+  localStorage.setItem('kanbanData', JSON.stringify(kanbanData));
+  renderKanban();
+}
+
+// ═══ CALENDAR VIEW ═══
+let calDate = new Date();
+
+function renderCalendar() {
+  const grid = document.getElementById('calGrid');
+  if (!grid) return;
+  
+  const year = calDate.getFullYear();
+  const month = calDate.getMonth();
+  const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('calMonth').textContent = `${monthNames[month]} ${year}`;
+  
+  grid.innerHTML = '';
+  const dayNames = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  dayNames.forEach(d => {
+    const el = document.createElement('div');
+    el.className = 'cal-day-header';
+    el.textContent = d;
+    grid.appendChild(el);
+  });
+  
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const today = new Date();
+  
+  // Previous month days
+  const prevDays = new Date(year, month, 0).getDate();
+  for (let i = firstDay - 1; i >= 0; i--) {
+    const el = document.createElement('div');
+    el.className = 'cal-day other-month';
+    el.textContent = prevDays - i;
+    grid.appendChild(el);
+  }
+  
+  // Current month days
+  const notes = state.notes || [];
+  for (let d = 1; d <= daysInMonth; d++) {
+    const el = document.createElement('div');
+    el.className = 'cal-day';
+    el.textContent = d;
+    
+    if (d === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
+      el.classList.add('today');
+    }
+    
+    const dayStart = new Date(year, month, d, 0, 0, 0).getTime();
+    const dayEnd = new Date(year, month, d, 23, 59, 59).getTime();
+    const hasNotes = notes.some(n => n.date >= dayStart && n.date <= dayEnd);
+    if (hasNotes) el.classList.add('has-notes');
+    
+    el.onclick = () => showCalDayNotes(d);
+    grid.appendChild(el);
+  }
+}
+
+function changeCalMonth(dir) {
+  if (dir === 0) { calDate = new Date(); }
+  else { calDate.setMonth(calDate.getMonth() + dir); }
+  renderCalendar();
+}
+
+function showCalDayNotes(day) {
+  const year = calDate.getFullYear();
+  const month = calDate.getMonth();
+  const dayStart = new Date(year, month, day, 0, 0, 0).getTime();
+  const dayEnd = new Date(year, month, day, 23, 59, 59).getTime();
+  const notes = (state.notes || []).filter(n => n.date >= dayStart && n.date <= dayEnd);
+  
+  const container = document.getElementById('calNotesList');
+  if (!container) return;
+  
+  if (notes.length === 0) {
+    container.innerHTML = '<div style="text-align:center;padding:24px;color:var(--text-secondary);">No notes for this day</div>';
+    return;
+  }
+  
+  container.innerHTML = notes.map(n => `
+    <div class="note-card" onclick="editNote(${n.id})" style="margin-bottom:10px;">
+      <div class="note-card-title">${escHtml(n.title)}</div>
+      <div class="note-card-preview">${escHtml((n.content||'').substring(0,80))}</div>
+    </div>
+  `).join('');
+}
+
+// ═══ TRASH / RECYCLE BIN ═══
+let trash = JSON.parse(localStorage.getItem('notecraft_trash') || '[]');
+
+function deleteNoteToTrash(noteId) {
+  const note = state.notes.find(n => n.id === noteId);
+  if (!note) return;
+  
+  trash.push({ ...note, deletedAt: Date.now() });
+  state.notes = state.notes.filter(n => n.id !== noteId);
+  saveState();
+  renderNotes();
+  renderTrash();
+  showToast('🗑️ Note moved to trash');
+}
+
+function renderTrash() {
+  const container = document.getElementById('trashList');
+  if (!container) return;
+  
+  if (trash.length === 0) {
+    container.innerHTML = '<div style="text-align:center;padding:48px;color:var(--text-secondary);">🗑️<br><br>Trash is empty</div>';
+    return;
+  }
+  
+  container.innerHTML = trash.map((item, idx) => `
+    <div class="trash-item">
+      <div class="trash-item-info">
+        <div class="trash-item-title">${escHtml(item.title)}</div>
+        <div class="trash-item-date">Deleted ${timeAgo(item.deletedAt)}</div>
+      </div>
+      <div class="trash-actions">
+        <button class="trash-btn trash-btn-restore" onclick="restoreFromTrash(${idx})">↩ Restore</button>
+        <button class="trash-btn trash-btn-delete" onclick="permanentDelete(${idx})">✕ Delete</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function restoreFromTrash(idx) {
+  const item = trash.splice(idx, 1)[0];
+  if (!item) return;
+  delete item.deletedAt;
+  state.notes.push(item);
+  saveState();
+  renderNotes();
+  renderTrash();
+  showToast('↩️ Note restored');
+}
+
+function permanentDelete(idx) {
+  trash.splice(idx, 1);
+  localStorage.setItem('notecraft_trash', JSON.stringify(trash));
+  renderTrash();
+  showToast('🗑️ Permanently deleted');
+}
+
+function emptyTrash() {
+  if (!confirm('Empty trash? This cannot be undone.')) return;
+  trash = [];
+  localStorage.setItem('notecraft_trash', JSON.stringify(trash));
+  renderTrash();
+  showToast('🗑️ Trash emptied');
+}
+
+// ═══ SCREENSHOT ═══
+function openScreenshot() {
+  // Use html2canvas-like approach with canvas API
+  try {
+    const app = document.getElementById('app');
+    // Simple screenshot using SVG foreignObject
+    const data = new XMLSerializer().serializeToString(document.documentElement);
+    const svgStr = `<svg xmlns="http://www.w3.org/2000/svg" width="${window.innerWidth}" height="${window.innerHeight}">
+      <foreignObject width="100%" height="100%">
+        <div xmlns="http://www.w3.org/1999/xhtml">${document.getElementById('app').innerHTML}</div>
+      </foreignObject>
+    </svg>`;
+    
+    // Alternative: Use canvas to capture
+    const canvas = document.createElement('canvas');
+    canvas.width = window.innerWidth * 2;
+    canvas.height = window.innerHeight * 2;
+    const ctx = canvas.getContext('2d');
+    ctx.scale(2, 2);
+    ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--bg-0') || '#0a0a0f';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    // Draw app content as text representation
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 24px Inter, sans-serif';
+    ctx.fillText('NoteCraft Pro - Screenshot', 24, 48);
+    ctx.font = '14px Inter, sans-serif';
+    ctx.fillStyle = '#888';
+    ctx.fillText(new Date().toLocaleString(), 24, 72);
+    
+    // Draw notes
+    let y = 100;
+    (state.notes || []).slice(0, 10).forEach(n => {
+      ctx.fillStyle = '#fff';
+      ctx.font = 'bold 16px Inter, sans-serif';
+      ctx.fillText(n.title || 'Untitled', 24, y);
+      y += 24;
+      ctx.fillStyle = '#aaa';
+      ctx.font = '13px Inter, sans-serif';
+      const preview = (n.content || '').substring(0, 80);
+      ctx.fillText(preview, 24, y);
+      y += 32;
+    });
+    
+    const dataUrl = canvas.toDataURL('image/png');
+    document.getElementById('capturePreview').src = dataUrl;
+    document.getElementById('captureOverlay').classList.add('show');
+  } catch(e) {
+    showToast('❌ Screenshot failed: ' + e.message);
+  }
+}
+
+function downloadScreenshot() {
+  const img = document.getElementById('capturePreview');
+  const a = document.createElement('a');
+  a.href = img.src;
+  a.download = `notecraft-screenshot-${Date.now()}.png`;
+  a.click();
+  showToast('💾 Screenshot saved!');
+}
+
+function shareScreenshot() {
+  const img = document.getElementById('capturePreview');
+  if (navigator.share) {
+    fetch(img.src).then(r => r.blob()).then(blob => {
+      const file = new File([blob], 'screenshot.png', { type: 'image/png' });
+      navigator.share({ files: [file], title: 'NoteCraft Pro Screenshot' }).catch(() => {});
+    });
+  } else {
+    downloadScreenshot();
+  }
+}
+
+function closeCaptureOverlay() {
+  document.getElementById('captureOverlay').classList.remove('show');
+}
+
+// ═══ SCREEN RECORDING ═══
+let mediaRecorder = null;
+let recordedChunks = [];
+let recordStartTime = 0;
+let recordTimerInterval = null;
+
+async function openScreenRecord() {
+  try {
+    const stream = await navigator.mediaDevices.getDisplayMedia({
+      video: { cursor: 'always' },
+      audio: true
+    });
+    
+    recordedChunks = [];
+    mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
+    
+    mediaRecorder.ondataavailable = (e) => {
+      if (e.data.size > 0) recordedChunks.push(e.data);
+    };
+    
+    mediaRecorder.onstop = () => {
+      const blob = new Blob(recordedChunks, { type: 'video/webm' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `notecraft-recording-${Date.now()}.webm`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('🎬 Recording saved!');
+      
+      stream.getTracks().forEach(t => t.stop());
+    };
+    
+    mediaRecorder.start(1000);
+    recordStartTime = Date.now();
+    document.getElementById('recIndicator').classList.add('show');
+    
+    recordTimerInterval = setInterval(() => {
+      const elapsed = Math.floor((Date.now() - recordStartTime) / 1000);
+      const mins = Math.floor(elapsed / 60);
+      const secs = elapsed % 60;
+      document.getElementById('recTimer').textContent = `${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
+    }, 1000);
+    
+    stream.getVideoTracks()[0].onended = () => stopScreenRecord();
+    
+    showToast('🎬 Recording started');
+  } catch(e) {
+    showToast('❌ Recording failed: ' + e.message);
+  }
+}
+
+function stopScreenRecord() {
+  if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+    mediaRecorder.stop();
+  }
+  clearInterval(recordTimerInterval);
+  document.getElementById('recIndicator').classList.remove('show');
+}
+
+// ═══ VERSION HISTORY ═══
+let noteVersions = JSON.parse(localStorage.getItem('noteVersions') || '{}');
+
+function saveVersion(noteId, title, content) {
+  if (!noteVersions[noteId]) noteVersions[noteId] = [];
+  noteVersions[noteId].push({
+    title, content,
+    timestamp: Date.now()
+  });
+  // Keep last 20 versions
+  if (noteVersions[noteId].length > 20) noteVersions[noteId] = noteVersions[noteId].slice(-20);
+  localStorage.setItem('noteVersions', JSON.stringify(noteVersions));
+}
+
+function showVersionHistory(noteId) {
+  const versions = noteVersions[noteId] || [];
+  const container = document.getElementById('versionList');
+  if (!container) return;
+  
+  if (versions.length === 0) {
+    container.innerHTML = '<div style="text-align:center;padding:48px;color:var(--text-secondary);">🕐<br><br>No versions yet</div>';
+  } else {
+    container.innerHTML = versions.slice().reverse().map((v, idx) => `
+      <div class="version-item" onclick="restoreVersion(${noteId}, ${versions.length - 1 - idx})">
+        <div class="version-dot"></div>
+        <div class="version-info">
+          <div class="version-time">${new Date(v.timestamp).toLocaleString()}</div>
+          <div class="version-preview">${escHtml((v.content || '').substring(0, 60))}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+  goScreen('sVersions', -1);
+}
+
+function restoreVersion(noteId, versionIdx) {
+  const version = (noteVersions[noteId] || [])[versionIdx];
+  if (!version) return;
+  
+  const note = state.notes.find(n => n.id === noteId);
+  if (note) {
+    note.title = version.title;
+    note.content = version.content;
+    note.date = Date.now();
+    saveState();
+    showToast('↩️ Version restored');
+    goScreen('sEditor', -1);
+  }
+}
+
+// ═══ SMART AI AUTO-TAGGING ═══
+function suggestSmartTags(title, content) {
+  const text = (title + ' ' + content).toLowerCase();
+  const suggestions = [];
+  
+  const tagMap = {
+    'work': ['meeting', 'project', 'deadline', 'client', 'office', 'team', 'sprint', 'review'],
+    'personal': ['family', 'home', 'friend', 'hobby', 'health', 'gym', 'recipe'],
+    'ideas': ['idea', 'concept', 'brainstorm', 'think', 'maybe', 'what if'],
+    'important': ['urgent', 'critical', 'asap', 'must', 'priority', 'deadline'],
+    'finance': ['money', 'budget', 'expense', 'income', 'investment', 'bank', 'bill'],
+    'travel': ['trip', 'flight', 'hotel', 'vacation', 'travel', 'booking'],
+    'learning': ['study', 'learn', 'course', 'book', 'tutorial', 'practice', 'exam'],
+    'health': ['doctor', 'medicine', 'exercise', 'diet', 'sleep', 'workout']
+  };
+  
+  Object.keys(tagMap).forEach(tag => {
+    if (tagMap[tag].some(word => text.includes(word))) {
+      suggestions.push(tag);
+    }
+  });
+  
+  return suggestions;
+}
+
+// ═══ HELPER FUNCTIONS ═══
+function timeAgo(timestamp) {
+  const diff = Date.now() - timestamp;
+  const mins = Math.floor(diff / 60000);
+  const hours = Math.floor(diff / 3600000);
+  const days = Math.floor(diff / 86400000);
+  
+  if (mins < 1) return 'just now';
+  if (mins < 60) return `${mins}m ago`;
+  if (hours < 24) return `${hours}h ago`;
+  return `${days}d ago`;
+}
+
+function escHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str || '';
+  return div.innerHTML;
+}
+
+// ═══ NAVIGATION UPDATE ═══
+// Add new screens to navigation
+const origGoScreen = typeof goScreen === 'function' ? goScreen : null;
+
+// ═══ INIT PREMIUM FEATURES ═══
+function initPremiumFeatures() {
+  updatePomoDisplay();
+  updatePomoStats();
+  syncNotesToKanban();
+  renderCalendar();
+  renderTrash();
+}
+
+
 </script>
 </body>
 </html>
