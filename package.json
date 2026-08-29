@@ -1,0 +1,20 @@
+{
+  "name": "notecraft-pro",
+  "version": "1.0.0",
+  "description": "Ultra premium notepad app for Android",
+  "main": "www/index.html",
+  "scripts": {
+    "build:android": "npx cap copy android && npx cap open android",
+    "build:apk": "cd android && ./gradlew assembleDebug"
+  },
+  "keywords": ["notepad", "android", "premium", "pwa"],
+  "author": "NoteCraft",
+  "license": "MIT",
+  "dependencies": {
+    "@capacitor/android": "^5.0.0",
+    "@capacitor/core": "^5.0.0",
+    "@capacitor/cli": "^5.0.0",
+    "@capacitor/status-bar": "^5.0.0",
+    "@capacitor/splash-screen": "^5.0.0"
+  }
+}
